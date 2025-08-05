@@ -15,6 +15,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Save, Palette, Bell, Shield, Globe } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useTheme } from "next-themes";
 
 interface AppSettings {
   siteName: string;
@@ -32,6 +33,8 @@ interface AppSettings {
 }
 
 export default function Settings() {
+  const { theme, setTheme } = useTheme();
+  
   const [settings, setSettings] = useState<AppSettings>({
     siteName: "Admin Dashboard",
     siteDescription: "Professional admin panel for managing your application",
@@ -44,7 +47,7 @@ export default function Settings() {
     sessionTimeout: "60",
     twoFactorAuth: false,
     backupFrequency: "daily",
-    theme: 'light'
+    theme: (theme as 'light' | 'dark' | 'system') || 'system'
   });
 
   const [hasChanges, setHasChanges] = useState(false);
@@ -52,6 +55,11 @@ export default function Settings() {
   const updateSetting = <K extends keyof AppSettings>(key: K, value: AppSettings[K]) => {
     setSettings(prev => ({ ...prev, [key]: value }));
     setHasChanges(true);
+    
+    // Apply theme changes immediately
+    if (key === 'theme') {
+      setTheme(value as string);
+    }
   };
 
   const handleSave = () => {

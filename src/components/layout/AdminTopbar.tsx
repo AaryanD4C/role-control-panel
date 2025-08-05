@@ -1,4 +1,4 @@
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface TopbarProps {
   userRole: 'Admin' | 'Editor' | 'Viewer';
@@ -17,6 +18,7 @@ interface TopbarProps {
 }
 
 export function AdminTopbar({ userRole, userName }: TopbarProps) {
+  const { logout } = useAuth();
   return (
     <header className="h-16 bg-admin-topbar border-b border-border px-6 flex items-center justify-between">
       {/* Search */}
@@ -68,7 +70,8 @@ export function AdminTopbar({ userRole, userName }: TopbarProps) {
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
+            <DropdownMenuItem onClick={logout} className="text-destructive">
+              <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
