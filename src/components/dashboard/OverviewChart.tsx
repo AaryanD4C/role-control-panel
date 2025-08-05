@@ -1,51 +1,97 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-const data = [
-  { name: 'Mon', signups: 12, logins: 89 },
-  { name: 'Tue', signups: 19, logins: 103 },
-  { name: 'Wed', signups: 8, logins: 78 },
-  { name: 'Thu', signups: 27, logins: 134 },
-  { name: 'Fri', signups: 23, logins: 156 },
-  { name: 'Sat', signups: 15, logins: 67 },
-  { name: 'Sun', signups: 9, logins: 45 },
-];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const data = {
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  datasets: [
+    {
+      label: 'Signups',
+      data: [12, 19, 8, 27, 23, 15, 9],
+      backgroundColor: 'hsl(var(--chart-1))',
+      borderColor: 'hsl(var(--chart-1))',
+      borderWidth: 1,
+      borderRadius: 4,
+    },
+    {
+      label: 'Logins',
+      data: [89, 103, 78, 134, 156, 67, 45],
+      backgroundColor: 'hsl(var(--chart-2))',
+      borderColor: 'hsl(var(--chart-2))',
+      borderWidth: 1,
+      borderRadius: 4,
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+      labels: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    tooltip: {
+      backgroundColor: 'hsl(var(--card))',
+      titleColor: 'hsl(var(--card-foreground))',
+      bodyColor: 'hsl(var(--card-foreground))',
+      borderColor: 'hsl(var(--border))',
+      borderWidth: 1,
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+      grid: {
+        color: 'hsl(var(--muted))',
+      },
+    },
+    y: {
+      ticks: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+      grid: {
+        color: 'hsl(var(--muted))',
+      },
+    },
+  },
+};
 
 export function OverviewChart() {
   return (
     <div className="h-[300px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-          <XAxis 
-            dataKey="name" 
-            className="text-muted-foreground"
-            fontSize={12}
-          />
-          <YAxis 
-            className="text-muted-foreground"
-            fontSize={12}
-          />
-          <Tooltip 
-            contentStyle={{
-              backgroundColor: 'hsl(var(--card))',
-              border: '1px solid hsl(var(--border))',
-              borderRadius: '6px'
-            }}
-          />
-          <Bar 
-            dataKey="signups" 
-            fill="hsl(var(--chart-1))" 
-            radius={[2, 2, 0, 0]}
-            name="Signups"
-          />
-          <Bar 
-            dataKey="logins" 
-            fill="hsl(var(--chart-2))" 
-            radius={[2, 2, 0, 0]}
-            name="Logins"
-          />
-        </BarChart>
-      </ResponsiveContainer>
+      <Bar data={data} options={options} />
     </div>
   );
 }

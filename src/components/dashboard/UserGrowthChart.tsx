@@ -1,52 +1,96 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-const data = [
-  { name: 'Jan', users: 400 },
-  { name: 'Feb', users: 300 },
-  { name: 'Mar', users: 600 },
-  { name: 'Apr', users: 800 },
-  { name: 'May', users: 700 },
-  { name: 'Jun', users: 900 },
-  { name: 'Jul', users: 1100 },
-  { name: 'Aug', users: 1300 },
-  { name: 'Sep', users: 1500 },
-  { name: 'Oct', users: 1800 },
-  { name: 'Nov', users: 2100 },
-  { name: 'Dec', users: 2400 },
-];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const data = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    {
+      label: 'Users',
+      data: [400, 300, 600, 800, 700, 900, 1100, 1300, 1500, 1800, 2100, 2400],
+      borderColor: 'hsl(var(--chart-1))',
+      backgroundColor: 'hsl(var(--chart-1))',
+      borderWidth: 2,
+      fill: false,
+      tension: 0.4,
+      pointBackgroundColor: 'hsl(var(--chart-1))',
+      pointBorderColor: 'hsl(var(--chart-1))',
+      pointRadius: 4,
+      pointHoverRadius: 6,
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+      labels: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    tooltip: {
+      backgroundColor: 'hsl(var(--card))',
+      titleColor: 'hsl(var(--card-foreground))',
+      bodyColor: 'hsl(var(--card-foreground))',
+      borderColor: 'hsl(var(--border))',
+      borderWidth: 1,
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+      grid: {
+        color: 'hsl(var(--muted))',
+      },
+    },
+    y: {
+      ticks: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+      grid: {
+        color: 'hsl(var(--muted))',
+      },
+    },
+  },
+};
 
 export function UserGrowthChart() {
   return (
     <div className="h-[300px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-          <XAxis 
-            dataKey="name" 
-            className="text-muted-foreground"
-            fontSize={12}
-          />
-          <YAxis 
-            className="text-muted-foreground"
-            fontSize={12}
-          />
-          <Tooltip 
-            contentStyle={{
-              backgroundColor: 'hsl(var(--card))',
-              border: '1px solid hsl(var(--border))',
-              borderRadius: '6px'
-            }}
-          />
-          <Line 
-            type="monotone" 
-            dataKey="users" 
-            stroke="hsl(var(--chart-1))" 
-            strokeWidth={2}
-            dot={{ fill: 'hsl(var(--chart-1))', strokeWidth: 2, r: 4 }}
-            activeDot={{ r: 6 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+      <Line data={data} options={options} />
     </div>
   );
 }

@@ -34,8 +34,8 @@ interface User {
 const mockUsers: User[] = [
   {
     id: "1",
-    name: "John Smith",
-    email: "john.smith@example.com",
+    name: "Harsh Patel",
+    email: "harsh.patel@example.com",
     role: "Admin",
     status: "Active",
     lastLogin: "2024-01-05",
@@ -43,8 +43,8 @@ const mockUsers: User[] = [
   },
   {
     id: "2",
-    name: "Sarah Johnson",
-    email: "sarah.j@example.com",
+    name: "Aryan Sharma",
+    email: "aryan.sharma@example.com",
     role: "Editor",
     status: "Active",
     lastLogin: "2024-01-04",
@@ -52,8 +52,8 @@ const mockUsers: User[] = [
   },
   {
     id: "3",
-    name: "Mike Wilson",
-    email: "mike.wilson@example.com",
+    name: "Aniket Singh",
+    email: "aniket.singh@example.com",
     role: "Viewer",
     status: "Inactive",
     lastLogin: "2023-12-20",
@@ -61,8 +61,8 @@ const mockUsers: User[] = [
   },
   {
     id: "4",
-    name: "Emily Davis",
-    email: "emily.davis@example.com",
+    name: "Sourav Kumar",
+    email: "sourav.kumar@example.com",
     role: "Editor",
     status: "Active",
     lastLogin: "2024-01-05",
@@ -70,8 +70,8 @@ const mockUsers: User[] = [
   },
   {
     id: "5",
-    name: "Tom Brown",
-    email: "tom.brown@example.com",
+    name: "Priya Gupta",
+    email: "priya.gupta@example.com",
     role: "Viewer",
     status: "Pending",
     lastLogin: "Never",

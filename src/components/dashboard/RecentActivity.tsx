@@ -5,35 +5,35 @@ import { formatDistanceToNow } from "date-fns";
 const activities = [
   {
     id: 1,
-    user: "John Smith",
+    user: "Harsh Patel",
     action: "Created new user account",
     timestamp: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
     type: "create"
   },
   {
     id: 2,
-    user: "Sarah Johnson",
+    user: "Aryan Sharma",
     action: "Updated user profile",
     timestamp: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago
     type: "update"
   },
   {
     id: 3,
-    user: "Mike Wilson",
+    user: "Aniket Singh",
     action: "Deleted user account",
     timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
     type: "delete"
   },
   {
     id: 4,
-    user: "Emily Davis",
+    user: "Sourav Kumar",
     action: "Changed app settings",
     timestamp: new Date(Date.now() - 1000 * 60 * 60), // 1 hour ago
     type: "update"
   },
   {
     id: 5,
-    user: "Admin User",
+    user: "Priya Gupta",
     action: "Generated analytics report",
     timestamp: new Date(Date.now() - 1000 * 60 * 120), // 2 hours ago
     type: "create"

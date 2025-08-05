@@ -1,28 +1,167 @@
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { Pie, Bar, Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-const userRoleData = [
-  { name: 'Viewers', value: 65, color: 'hsl(var(--chart-1))' },
-  { name: 'Editors', value: 25, color: 'hsl(var(--chart-2))' },
-  { name: 'Admins', value: 10, color: 'hsl(var(--chart-3))' }
-];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-const engagementData = [
-  { name: 'Week 1', pageViews: 4000, sessions: 2400, bounceRate: 35 },
-  { name: 'Week 2', pageViews: 3000, sessions: 1398, bounceRate: 42 },
-  { name: 'Week 3', pageViews: 2000, sessions: 9800, bounceRate: 29 },
-  { name: 'Week 4', pageViews: 2780, sessions: 3908, bounceRate: 38 },
-];
+const userRoleData = {
+  labels: ['Viewers', 'Editors', 'Admins'],
+  datasets: [
+    {
+      data: [65, 25, 10],
+      backgroundColor: [
+        'hsl(var(--chart-1))',
+        'hsl(var(--chart-2))',
+        'hsl(var(--chart-3))'
+      ],
+      borderColor: [
+        'hsl(var(--chart-1))',
+        'hsl(var(--chart-2))',
+        'hsl(var(--chart-3))'
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 
-const dailyActiveUsers = [
-  { day: 'Mon', users: 234 },
-  { day: 'Tue', users: 321 },
-  { day: 'Wed', users: 287 },
-  { day: 'Thu', users: 398 },
-  { day: 'Fri', users: 456 },
-  { day: 'Sat', users: 289 },
-  { day: 'Sun', users: 198 },
-];
+const engagementData = {
+  labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+  datasets: [
+    {
+      label: 'Page Views',
+      data: [4000, 3000, 2000, 2780],
+      borderColor: 'hsl(var(--chart-1))',
+      backgroundColor: 'hsl(var(--chart-1))',
+      borderWidth: 2,
+      fill: false,
+      tension: 0.4,
+    },
+    {
+      label: 'Sessions',
+      data: [2400, 1398, 9800, 3908],
+      borderColor: 'hsl(var(--chart-2))',
+      backgroundColor: 'hsl(var(--chart-2))',
+      borderWidth: 2,
+      fill: false,
+      tension: 0.4,
+    },
+    {
+      label: 'Bounce Rate (%)',
+      data: [35, 42, 29, 38],
+      borderColor: 'hsl(var(--chart-3))',
+      backgroundColor: 'hsl(var(--chart-3))',
+      borderWidth: 2,
+      fill: false,
+      tension: 0.4,
+    },
+  ],
+};
+
+const dailyActiveUsers = {
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  datasets: [
+    {
+      label: 'Users',
+      data: [234, 321, 287, 398, 456, 289, 198],
+      backgroundColor: 'hsl(var(--chart-1))',
+      borderColor: 'hsl(var(--chart-1))',
+      borderWidth: 1,
+      borderRadius: 4,
+    },
+  ],
+};
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+      labels: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    tooltip: {
+      backgroundColor: 'hsl(var(--card))',
+      titleColor: 'hsl(var(--card-foreground))',
+      bodyColor: 'hsl(var(--card-foreground))',
+      borderColor: 'hsl(var(--border))',
+      borderWidth: 1,
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+      grid: {
+        color: 'hsl(var(--muted))',
+      },
+    },
+    y: {
+      ticks: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+      grid: {
+        color: 'hsl(var(--muted))',
+      },
+    },
+  },
+};
+
+const pieOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'bottom' as const,
+      labels: {
+        color: 'hsl(var(--muted-foreground))',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    tooltip: {
+      backgroundColor: 'hsl(var(--card))',
+      titleColor: 'hsl(var(--card-foreground))',
+      bodyColor: 'hsl(var(--card-foreground))',
+      borderColor: 'hsl(var(--border))',
+      borderWidth: 1,
+    },
+  },
+};
 
 export default function Analytics() {
   return (
@@ -42,37 +181,7 @@ export default function Analytics() {
           </CardHeader>
           <CardContent>
             <div className="h-[200px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={userRoleData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={40}
-                    outerRadius={80}
-                    dataKey="value"
-                  >
-                    {userRoleData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-4 space-y-2">
-              {userRoleData.map((item) => (
-                <div key={item.name} className="flex items-center justify-between text-sm">
-                  <div className="flex items-center">
-                    <div 
-                      className="w-3 h-3 rounded-full mr-2" 
-                      style={{ backgroundColor: item.color }}
-                    />
-                    {item.name}
-                  </div>
-                  <span className="font-medium">{item.value}%</span>
-                </div>
-              ))}
+              <Pie data={userRoleData} options={pieOptions} />
             </div>
           </CardContent>
         </Card>
@@ -83,32 +192,7 @@ export default function Analytics() {
           </CardHeader>
           <CardContent>
             <div className="h-[200px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={dailyActiveUsers}>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis 
-                    dataKey="day" 
-                    className="text-muted-foreground"
-                    fontSize={12}
-                  />
-                  <YAxis 
-                    className="text-muted-foreground"
-                    fontSize={12}
-                  />
-                  <Tooltip 
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--card))',
-                      border: '1px solid hsl(var(--border))',
-                      borderRadius: '6px'
-                    }}
-                  />
-                  <Bar 
-                    dataKey="users" 
-                    fill="hsl(var(--chart-1))" 
-                    radius={[4, 4, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+              <Bar data={dailyActiveUsers} options={chartOptions} />
             </div>
           </CardContent>
         </Card>
@@ -120,8 +204,8 @@ export default function Analytics() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Monthly Active Users</span>
-                <span className="font-medium">2,543</span>
+                <span className="text-muted-foreground">Monthly Revenue</span>
+                <span className="font-medium">₹2,54,300</span>
               </div>
               <div className="w-full bg-muted rounded-full h-2">
                 <div className="bg-chart-1 h-2 rounded-full" style={{ width: '78%' }}></div>
@@ -159,48 +243,7 @@ export default function Analytics() {
           </CardHeader>
           <CardContent>
             <div className="h-[350px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={engagementData}>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis 
-                    dataKey="name" 
-                    className="text-muted-foreground"
-                    fontSize={12}
-                  />
-                  <YAxis 
-                    className="text-muted-foreground"
-                    fontSize={12}
-                  />
-                  <Tooltip 
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--card))',
-                      border: '1px solid hsl(var(--border))',
-                      borderRadius: '6px'
-                    }}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="pageViews" 
-                    stroke="hsl(var(--chart-1))" 
-                    strokeWidth={2}
-                    name="Page Views"
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="sessions" 
-                    stroke="hsl(var(--chart-2))" 
-                    strokeWidth={2}
-                    name="Sessions"
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="bounceRate" 
-                    stroke="hsl(var(--chart-3))" 
-                    strokeWidth={2}
-                    name="Bounce Rate (%)"
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              <Line data={engagementData} options={chartOptions} />
             </div>
           </CardContent>
         </Card>
