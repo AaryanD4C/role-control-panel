@@ -37,6 +37,20 @@ const activities = [
     action: "Generated analytics report",
     timestamp: new Date(Date.now() - 1000 * 60 * 120), // 2 hours ago
     type: "create"
+  },
+  {
+    id: 6,
+    user: "Rohit Verma",
+    action: "Exported user data",
+    timestamp: new Date(Date.now() - 1000 * 60 * 180), // 3 hours ago
+    type: "create"
+  },
+  {
+    id: 7,
+    user: "Neha Agarwal",
+    action: "Modified user permissions",
+    timestamp: new Date(Date.now() - 1000 * 60 * 240), // 4 hours ago
+    type: "update"
   }
 ];
 

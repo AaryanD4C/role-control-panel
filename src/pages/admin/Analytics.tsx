@@ -32,16 +32,17 @@ const userRoleData = {
     {
       data: [65, 25, 10],
       backgroundColor: [
-        'hsl(var(--chart-1))',
-        'hsl(var(--chart-2))',
-        'hsl(var(--chart-3))'
+        'rgba(34, 197, 94, 0.8)',
+        'rgba(245, 158, 11, 0.8)',
+        'rgba(239, 68, 68, 0.8)'
       ],
       borderColor: [
-        'hsl(var(--chart-1))',
-        'hsl(var(--chart-2))',
-        'hsl(var(--chart-3))'
+        'rgb(34, 197, 94)',
+        'rgb(245, 158, 11)',
+        'rgb(239, 68, 68)'
       ],
-      borderWidth: 1,
+      borderWidth: 2,
+      hoverOffset: 4,
     },
   ],
 };
@@ -52,29 +53,35 @@ const engagementData = {
     {
       label: 'Page Views',
       data: [4000, 3000, 2000, 2780],
-      borderColor: 'hsl(var(--chart-1))',
-      backgroundColor: 'hsl(var(--chart-1))',
-      borderWidth: 2,
-      fill: false,
+      borderColor: 'rgb(59, 130, 246)',
+      backgroundColor: 'rgba(59, 130, 246, 0.1)',
+      borderWidth: 3,
+      fill: true,
       tension: 0.4,
+      pointBackgroundColor: 'rgb(59, 130, 246)',
+      pointRadius: 5,
     },
     {
       label: 'Sessions',
       data: [2400, 1398, 9800, 3908],
-      borderColor: 'hsl(var(--chart-2))',
-      backgroundColor: 'hsl(var(--chart-2))',
-      borderWidth: 2,
-      fill: false,
+      borderColor: 'rgb(16, 185, 129)',
+      backgroundColor: 'rgba(16, 185, 129, 0.1)',
+      borderWidth: 3,
+      fill: true,
       tension: 0.4,
+      pointBackgroundColor: 'rgb(16, 185, 129)',
+      pointRadius: 5,
     },
     {
       label: 'Bounce Rate (%)',
       data: [35, 42, 29, 38],
-      borderColor: 'hsl(var(--chart-3))',
-      backgroundColor: 'hsl(var(--chart-3))',
-      borderWidth: 2,
-      fill: false,
+      borderColor: 'rgb(251, 146, 60)',
+      backgroundColor: 'rgba(251, 146, 60, 0.1)',
+      borderWidth: 3,
+      fill: true,
       tension: 0.4,
+      pointBackgroundColor: 'rgb(251, 146, 60)',
+      pointRadius: 5,
     },
   ],
 };
@@ -85,10 +92,26 @@ const dailyActiveUsers = {
     {
       label: 'Users',
       data: [234, 321, 287, 398, 456, 289, 198],
-      backgroundColor: 'hsl(var(--chart-1))',
-      borderColor: 'hsl(var(--chart-1))',
-      borderWidth: 1,
-      borderRadius: 4,
+      backgroundColor: [
+        'rgba(168, 85, 247, 0.8)',
+        'rgba(59, 130, 246, 0.8)',
+        'rgba(16, 185, 129, 0.8)',
+        'rgba(245, 158, 11, 0.8)',
+        'rgba(239, 68, 68, 0.8)',
+        'rgba(236, 72, 153, 0.8)',
+        'rgba(14, 165, 233, 0.8)'
+      ],
+      borderColor: [
+        'rgb(168, 85, 247)',
+        'rgb(59, 130, 246)',
+        'rgb(16, 185, 129)',
+        'rgb(245, 158, 11)',
+        'rgb(239, 68, 68)',
+        'rgb(236, 72, 153)',
+        'rgb(14, 165, 233)'
+      ],
+      borderWidth: 2,
+      borderRadius: 6,
     },
   ],
 };

@@ -36,7 +36,7 @@ interface ActivityLog {
 const mockLogs: ActivityLog[] = [
   {
     id: "1",
-    user: "John Smith",
+    user: "Harsh Patel",
     action: "User Login",
     description: "Successfully logged into admin dashboard",
     timestamp: new Date(Date.now() - 1000 * 60 * 5),
@@ -46,9 +46,9 @@ const mockLogs: ActivityLog[] = [
   },
   {
     id: "2",
-    user: "Sarah Johnson",
+    user: "Aryan Sharma",
     action: "User Created",
-    description: "Created new user account for 'Mike Brown'",
+    description: "Created new user account for 'Priya Gupta'",
     timestamp: new Date(Date.now() - 1000 * 60 * 15),
     type: "create",
     ipAddress: "192.168.1.5",
@@ -56,7 +56,7 @@ const mockLogs: ActivityLog[] = [
   },
   {
     id: "3",
-    user: "Mike Wilson",
+    user: "Aniket Singh",
     action: "Settings Updated",
     description: "Changed notification preferences",
     timestamp: new Date(Date.now() - 1000 * 60 * 30),
@@ -66,7 +66,7 @@ const mockLogs: ActivityLog[] = [
   },
   {
     id: "4",
-    user: "Emily Davis",
+    user: "Sourav Kumar",
     action: "User Deleted",
     description: "Permanently deleted user account 'inactive_user@example.com'",
     timestamp: new Date(Date.now() - 1000 * 60 * 60),
@@ -76,7 +76,7 @@ const mockLogs: ActivityLog[] = [
   },
   {
     id: "5",
-    user: "Admin User",
+    user: "Rohit Verma",
     action: "System Export",
     description: "Exported user analytics report",
     timestamp: new Date(Date.now() - 1000 * 60 * 120),
@@ -86,13 +86,33 @@ const mockLogs: ActivityLog[] = [
   },
   {
     id: "6",
-    user: "Tom Brown",
+    user: "Neha Agarwal",
     action: "User Logout",
     description: "Logged out from admin dashboard",
     timestamp: new Date(Date.now() - 1000 * 60 * 180),
     type: "logout",
     ipAddress: "192.168.1.9",
     userAgent: "Edge 120.0"
+  },
+  {
+    id: "7",
+    user: "Vikash Mishra",
+    action: "Data Import",
+    description: "Imported bulk user data from CSV file",
+    timestamp: new Date(Date.now() - 1000 * 60 * 240),
+    type: "create",
+    ipAddress: "192.168.1.12",
+    userAgent: "Chrome 120.0"
+  },
+  {
+    id: "8",
+    user: "Deepika Jain",
+    action: "Permission Update",
+    description: "Updated role permissions for editor users",
+    timestamp: new Date(Date.now() - 1000 * 60 * 300),
+    type: "update",
+    ipAddress: "192.168.1.15",
+    userAgent: "Firefox 121.0"
   }
 ];
 
