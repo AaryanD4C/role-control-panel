@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 export type UserRole = 'Admin' | 'Editor' | 'Viewer';
 
@@ -51,13 +51,19 @@ const mockUsers: Record<string, { password: string; user: User }> = {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [lastActivity, setLastActivity] = useState<number>(Date.now());
+
+  // Session timeout (30 minutes)
+  const SESSION_TIMEOUT = 30 * 60 * 1000;
 
   const login = async (email: string, password: string): Promise<boolean> => {
     const userRecord = mockUsers[email];
     
     if (userRecord && userRecord.password === password) {
       setUser(userRecord.user);
+      setLastActivity(Date.now());
       localStorage.setItem('auth-user', JSON.stringify(userRecord.user));
+      localStorage.setItem('last-activity', Date.now().toString());
       return true;
     }
     
@@ -67,15 +73,60 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('auth-user');
+    localStorage.removeItem('last-activity');
+  };
+
+  // Update activity on user interaction
+  const updateActivity = () => {
+    setLastActivity(Date.now());
+    localStorage.setItem('last-activity', Date.now().toString());
   };
 
   // Check for stored user on mount
-  useState(() => {
+  useEffect(() => {
     const storedUser = localStorage.getItem('auth-user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const storedActivity = localStorage.getItem('last-activity');
+    
+    if (storedUser && storedActivity) {
+      const lastActivityTime = parseInt(storedActivity);
+      const now = Date.now();
+      
+      if (now - lastActivityTime < SESSION_TIMEOUT) {
+        setUser(JSON.parse(storedUser));
+        setLastActivity(lastActivityTime);
+      } else {
+        // Session expired
+        logout();
+      }
     }
-  });
+  }, []);
+
+  // Session timeout check
+  useEffect(() => {
+    if (!user) return;
+
+    const checkSession = () => {
+      const now = Date.now();
+      if (now - lastActivity > SESSION_TIMEOUT) {
+        logout();
+      }
+    };
+
+    const interval = setInterval(checkSession, 60000); // Check every minute
+    
+    // Add event listeners for user activity
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    events.forEach(event => {
+      document.addEventListener(event, updateActivity, true);
+    });
+
+    return () => {
+      clearInterval(interval);
+      events.forEach(event => {
+        document.removeEventListener(event, updateActivity, true);
+      });
+    };
+  }, [user, lastActivity]);
 
   const value = {
     user,

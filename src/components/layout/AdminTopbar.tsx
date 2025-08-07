@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
+import { NotificationPanel } from "@/components/notifications/NotificationPanel";
+import { useState } from "react";
 
 interface TopbarProps {
   userRole: 'Admin' | 'Editor' | 'Viewer';
@@ -19,6 +21,8 @@ interface TopbarProps {
 
 export function AdminTopbar({ userRole, userName }: TopbarProps) {
   const { logout } = useAuth();
+  const [showNotifications, setShowNotifications] = useState(false);
+  
   return (
     <header className="h-16 bg-admin-topbar border-b border-border px-6 flex items-center justify-between">
       {/* Search */}
@@ -35,15 +39,26 @@ export function AdminTopbar({ userRole, userName }: TopbarProps) {
       {/* Right side */}
       <div className="flex items-center space-x-4">
         {/* Notifications */}
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell size={20} />
-          <Badge 
-            variant="destructive" 
-            className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+        <div className="relative">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="relative"
+            onClick={() => setShowNotifications(!showNotifications)}
           >
-            3
-          </Badge>
-        </Button>
+            <Bell size={20} />
+            <Badge 
+              variant="destructive" 
+              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+            >
+              3
+            </Badge>
+          </Button>
+          <NotificationPanel 
+            isOpen={showNotifications} 
+            onClose={() => setShowNotifications(false)} 
+          />
+        </div>
 
         {/* User menu */}
         <DropdownMenu>

@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface SidebarProps {
   userRole: 'Admin' | 'Editor' | 'Viewer';
@@ -19,6 +20,7 @@ interface SidebarProps {
 export function AdminSidebar({ userRole }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { logout } = useAuth();
 
   const navItems = [
     {
@@ -104,6 +106,7 @@ export function AdminSidebar({ userRole }: SidebarProps) {
       <div className="p-4 border-t border-admin-sidebar-hover">
         <Button
           variant="ghost"
+          onClick={logout}
           className={cn(
             "w-full justify-start text-admin-text-light hover:bg-admin-sidebar-hover hover:text-white",
             collapsed && "justify-center"
