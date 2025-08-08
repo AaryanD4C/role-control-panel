@@ -1,73 +1,72 @@
-# Welcome to your Lovable project
+# Admin Dashboard
 
-## Project info
+A responsive and modern **Admin Dashboard** designed to manage users, monitor analytics, control application settings, and review user activity logs. Built with scalability, clarity, and role-based access in mind.
 
-**URL**: https://lovable.dev/projects/740817d7-4ddd-40d5-b824-dabf700684bd
+## 🔧 Features
 
-## How can I edit this code?
+- **User Management**
+  - View, edit, and delete users
+  - Search and filter by role or status
+  - Paginated user table for large datasets
 
-There are several ways of editing your application.
+- **Analytics Dashboard**
+  - Visualize key metrics using interactive charts (powered by Chart.js)
+  - Display daily active users, user growth, sign-ups, and engagement
+  - Support for real-time updates
 
-**Use Lovable**
+- **App Settings Panel**
+  - Configure global app preferences such as themes and notifications
+  - Manage roles and permissions
+  - Toggle feature flags and maintenance mode
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/740817d7-4ddd-40d5-b824-dabf700684bd) and start prompting.
+- **User Activity Logs**
+  - Track user actions like login, update, and deletion events
+  - Display timestamped logs in a collapsible or dedicated view
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Role-Based UI Rendering**
+  - Display dashboard sections based on user roles (Admin, Editor, Viewer)
+  - Prevent unauthorized access via frontend and backend checks
 
-**Use your preferred IDE**
+## 🗂️ Project Structure
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+admin-dashboard/
+├── public/
+├── src/
+│ ├── components/
+│ ├── pages/
+│ ├── hooks/
+│ ├── utils/
+│ └── App.jsx
+├── .env
+├── package.json
+└── README.md
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
+## 🚀 Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 1. Clone the Repository
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+git clone https://github.com/coffeefuelbump/admin-dashboard.git
+cd admin-dashboard
+2. Install Dependencies
+npm install
+3. Start Development Server
 npm run dev
-```
+4. Build for Production
+npm run build
 
-**Edit a file directly in GitHub**
+⚙️ Tech Stack
+React – Frontend framework
+Chart.js – Data visualization
+Tailwind CSS – UI styling
+Firebase / Supabase – Backend services and authentication
+React Router – Routing and navigation
+Custom Role Middleware – Role-based UI rendering
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/740817d7-4ddd-40d5-b824-dabf700684bd) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+✅ Best Practices
+Modular and reusable component structure
+Responsive layout for all screen sizes
+Separation of concerns for logic, UI, and state
+Secure authentication and access control
+Clean and consistent UI design
